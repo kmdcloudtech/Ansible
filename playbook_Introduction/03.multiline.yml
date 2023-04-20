@@ -1,0 +1,15 @@
+--- # Multiline Format
+- hosts: web 
+  tasks:
+   - copy: src=/etc/shadow
+           dest=/tmp
+           owner=sachin
+           group=india
+           mode=777
+   - file: path=/tmp/azure
+           state=directory
+   - yum:  name=nfs-utils
+           state=latest
+   - service: name=nfs-server
+              state=started
+              
