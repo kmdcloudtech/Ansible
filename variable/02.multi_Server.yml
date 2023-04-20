@@ -1,0 +1,27 @@
+
+
+- hosts: web
+  tasks:
+    - name: "This task going to Create Directory Name of {{ mydir }} done"
+      file:
+        path: "{{ mydir }}"
+        state: directory
+    
+    - name: "This Task going to Copy From {{ myfile }} to {{ mydir }}"
+      copy:
+       src: "{{ myfile }}"
+       dest: "{{ mydir }}"
+       owner: sachin
+       group: india
+       mode: 777
+    - name: "This Task is Going to Install packages To Remote Machines {{ mypkg }}"
+      yum:
+        name: "{{ mypkg }}"
+        state: latest
+  
+# ## go to inventory file of master machine
+# ]# vi /etc/ansible/hosts
+# [web]
+# 172.31.42.74  mydir=/tmp/india myfile=/etc/passwd mypkg=httpd,samba
+# 172.31.45.120 mydir=/tmp/delhi myfile=/etc/group mypkg=git,nfs-utils
+

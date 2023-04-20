@@ -1,0 +1,46 @@
+
+# go to /etc/ansible/hosts and manage two groups
+# Insert variables and values
+
+# [web]
+# 172.31.42.74 mydir=/tmp/india myfile=/etc/passwd mypkg=httpd,samba
+
+
+# [app]
+# 172.31.45.120 mydir=/tmp/delhi myfile=/etc/group mypkg=git,nfs-utils
+
+
+# [web:vars]
+# mydir=/tmp/cloudtech
+# myfile=/etc/passwd
+# mypkg=httpd,git
+
+# [app:vars]
+# mydir=/tmp/hndcloud
+# myfile=/etc/shadow
+# mypkg=samba,tree
+
+
+
+- hosts: all
+  tasks:
+    - name: "This task going to Create Directory Name of {{ mydir }} done"
+      file:
+        path: "{{ mydir }}"
+        state: directory
+    
+    - name: "This Task going to Copy From {{ myfile }} to {{ mydir }}"
+      copy:
+       src: "{{ myfile }}"
+       dest: "{{ mydir }}"
+       owner: sachin
+       group: india
+       mode: 777
+    - name: "This Task is Going to Install packages To Remote Machines {{ mypkg }}"
+      yum:
+        name: "{{ mypkg }}"
+        state: latest
+  
+
+  Note: it gives priority to host ip based variable in comparison to 
+        group based variable

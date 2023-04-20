@@ -1,0 +1,20 @@
+- hosts: all
+  tasks:       # Remove variable file address
+    - name: "This task going to Create Directory Name of {{ mydir }} done"
+      file:
+        path: "{{ mydir }}"
+        state: directory
+
+    - name: "This Task going to Copy From {{ myfile }} to {{ mydir }}"
+      copy:
+       src: "{{ myfile }}"
+       dest: "{{ mydir }}"
+       owner: sachin
+       group: india
+       mode: 777
+    - name: "This Task is Going to Install packages To Remote Machines {{ mypkg }}"
+      yum:
+        name: "{{ mypkg }}"
+        state: latest
+
+ ]# ansible-playbook variable.yml -e mydir=/tmp/cloudtech -e myfile=/etc/passwd -e mypkg=http,samba,tree

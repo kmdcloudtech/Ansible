@@ -1,0 +1,8 @@
+mydir: /tmp/cloudtech
+myfile: /etc/fstab
+mypkg:
+   - httpd
+   - nfs-utils
+   - samba
+   - tree
+   

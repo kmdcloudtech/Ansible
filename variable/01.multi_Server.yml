@@ -1,0 +1,37 @@
+- hosts: web
+  vars:
+   mydir: /tmp/cloudtech
+   myfile: /etc/passwd
+   mypkg:
+     - httpd
+     - nfs-utils
+     
+  tasks:
+    - name: "This task going to Create Directory Name of {{ mydir }} done"
+      file:
+        path: "{{ mydir }}"
+        state: directory
+    
+    - name: "This Task going to Copy From {{ myfile }} to {{ mydir }}"
+      copy:
+       src: "{{ myfile }}"
+       dest: "{{ mydir }}"
+       owner: sachin
+       group: india
+       mode: 777
+    - name: "This Task is Going to Install packages To Remote Machines {{ mypkg }}"
+      yum:
+        name: "{{ mypkg }}"
+        state: latest
+  
+- hosts: app
+  vars:
+     mydir: /tmp/hndcloud
+     myfile: /etc/fstab
+  tasks:
+      - file: 
+         path: "{{ mydir }}"
+         state: directory
+
+
+
